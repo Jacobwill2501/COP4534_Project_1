@@ -23,7 +23,7 @@ public class COP4534_Proj_1 {
         int valueOfN = 100;
         comparisonCount = 0;
 
-        String outputFilename = "output.csv";
+        String outputFilename = "COP4534_Proj_1_blocks_short.csv";
         PrintWriter output = null;
 
         try {
