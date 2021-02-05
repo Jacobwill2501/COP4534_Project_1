@@ -70,10 +70,10 @@ public class COP4534_Proj_1 {
         // -----------------------------------------------------------------------------------
         valueOfN = 100;
         outputFilename = "COP4534_Proj_1_blocks_short.csv";
-        output = null;
+        PrintWriter output2 = null;
 
         try {
-            output = new PrintWriter(new FileWriter(outputFilename));
+            output2 = new PrintWriter(new FileWriter(outputFilename));
         } catch (IOException ex) {
             System.exit(1);
         }
@@ -82,8 +82,8 @@ public class COP4534_Proj_1 {
         x = rnd.nextInt(100);
 
         // Titles for each column in the csv file
-        output.println("Value of N" + "," + "Comparisons of O(n)" + "," + "Comparisons of O(M + log n)" + ","
-                + "Comparisons of O(log n)");
+        output2.println("Value of N" + "," + " Comparisons of O(n)" + "," + " Comparisons of O(M + log n)" + ","
+                + " Comparisons of O(log n)");
 
         for (int i = 0; i < numberOfExcelLines; i++) {
             int[] list = new int[valueOfN]; // initiating array with N length
@@ -103,13 +103,13 @@ public class COP4534_Proj_1 {
             int countOf3 = comparisonCount;
 
             // putting values in the csv file
-            output.println(valueOfN + "," + countOf1 + "," + countOf2 + "," + countOf3);
+            output2.println(valueOfN + "," + countOf1 + "," + countOf2 + "," + countOf3);
 
             // increasing the length of array for next run
             valueOfN += 100;
         }
 
-        output.close();
+        output2.close();
     }
 
     private int binarySearch(int[] list, int k) {
