@@ -4,6 +4,12 @@ import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Random;
 
+/*
+Name: Jacob Williams
+Section: COP4534 U01 1211
+Term: Spring 2021
+Panther ID: 6182345
+*/
 public class COP4534_Proj_1 {
     private int comparisonCount;
 
