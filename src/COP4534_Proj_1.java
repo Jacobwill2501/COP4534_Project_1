@@ -1,36 +1,66 @@
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Arrays;
 import java.util.Random;
 
-public class Prog14_01 {
+public class COP4534_Proj_1 {
     private int comparisonCount;
 
     public static void main(String[] args) {
-        new Prog14_01();
+        new COP4534_Proj_1();
     }
 
-    public Prog14_01() {
+    public COP4534_Proj_1() {
         Random rnd = new Random();
-        int[] list = new int[10000];
-        // int[] list = { 6, 0, 0, 4, 1, 2, 6, 6 };
+        int numberOfExcelLines = 10000;
+        int valueOfN = 100;
         comparisonCount = 0;
 
-        fillArray(list);
-        // printArray(list);
-        Arrays.sort(list);
-        // printArray(list);
+        String outputFilename = "output.csv";
+        PrintWriter output = null;
+
+        /*
+         * fillArray(list); printArray(list); Arrays.sort(list); printArray(list);
+         * 
+         * 
+         * System.out.println(); System.out.println(); System.out.println(x +
+         * " is in the array " + findIntegerCount1(list, x) + " times");
+         * System.out.println("Number of comparisons for O(n): " + comparisonCount);
+         * System.out.println(); System.out.println(x + " is in the array " +
+         * findIntegerCount2(list, x) + " times");
+         * System.out.println("Number of comparisons for O(m + log n): " +
+         * comparisonCount); System.out.println(); System.out.println();
+         * System.out.println();
+         */
+
+        try {
+            output = new PrintWriter(new FileWriter(outputFilename));
+        } catch (IOException ex) {
+            System.exit(1);
+        }
 
         int x = rnd.nextInt(10);
-        // int x = 9;
-        System.out.println();
-        System.out.println();
-        System.out.println(x + " is in the array " + findIntegerCount1(list, x) + " times");
-        System.out.println("Number of comparisons for O(n): " + comparisonCount);
-        System.out.println();
-        System.out.println(x + " is in the array " + findIntegerCount2(list, x) + " times");
-        System.out.println("Number of comparisons for O(m + log n): " + comparisonCount);
-        System.out.println();
-        System.out.println();
-        System.out.println();
+        output.println("Value of N" + "," + "Comparisons of O(n)" + "," + "Comparisons of O(M + log n)" + ","
+                + "Comparisons of O(log n)");
+
+        for (int i = 0; i < numberOfExcelLines; i++) {
+            int[] list = new int[valueOfN];
+            fillArray(list);
+            Arrays.sort(list);
+
+            findIntegerCount1(list, x);
+            int countOf1 = comparisonCount;
+            findIntegerCount2(list, x);
+            int countOf2 = comparisonCount;
+            findIntegerCount3(list, x);
+            int countOf3 = comparisonCount;
+
+            output.println(valueOfN + "," + countOf1 + "," + countOf2 + "," + countOf3);
+            valueOfN += 100;
+        }
+
+        output.close();
     }
 
     private int binarySearch(int[] list, int k) {
@@ -111,6 +141,7 @@ public class Prog14_01 {
     // O(log n)
     private int findIntegerCount3(int[] list, int k) {
         int numberOfAppearances = 0;
+        comparisonCount = 0;
 
         return numberOfAppearances;
     }
