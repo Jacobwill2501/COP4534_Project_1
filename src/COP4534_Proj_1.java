@@ -20,43 +20,40 @@ public class COP4534_Proj_1 {
         String outputFilename = "output.csv";
         PrintWriter output = null;
 
-        /*
-         * fillArray(list); printArray(list); Arrays.sort(list); printArray(list);
-         * 
-         * 
-         * System.out.println(); System.out.println(); System.out.println(x +
-         * " is in the array " + findIntegerCount1(list, x) + " times");
-         * System.out.println("Number of comparisons for O(n): " + comparisonCount);
-         * System.out.println(); System.out.println(x + " is in the array " +
-         * findIntegerCount2(list, x) + " times");
-         * System.out.println("Number of comparisons for O(m + log n): " +
-         * comparisonCount); System.out.println(); System.out.println();
-         * System.out.println();
-         */
-
         try {
             output = new PrintWriter(new FileWriter(outputFilename));
         } catch (IOException ex) {
             System.exit(1);
         }
 
+        // setting the value we will count in the different algorithms
         int x = rnd.nextInt(10);
+
+        // Titles for each column in the csv file
         output.println("Value of N" + "," + "Comparisons of O(n)" + "," + "Comparisons of O(M + log n)" + ","
                 + "Comparisons of O(log n)");
 
         for (int i = 0; i < numberOfExcelLines; i++) {
-            int[] list = new int[valueOfN];
-            fillArray(list);
-            Arrays.sort(list);
+            int[] list = new int[valueOfN]; // initiating array with N length
+            fillArray(list); // filling the array with random values ranging from 0-10
+            Arrays.sort(list); // sorting the array
 
+            // O(n)
             findIntegerCount1(list, x);
             int countOf1 = comparisonCount;
+
+            // O(M + log n)
             findIntegerCount2(list, x);
             int countOf2 = comparisonCount;
+
+            // O(log n)
             findIntegerCount3(list, x);
             int countOf3 = comparisonCount;
 
+            // putting values in the csv file
             output.println(valueOfN + "," + countOf1 + "," + countOf2 + "," + countOf3);
+
+            // increasing the length of array for next run
             valueOfN += 100;
         }
 
@@ -103,9 +100,11 @@ public class COP4534_Proj_1 {
         int numberOfAppearances = 0;
         for (int i = 0; i < list.length; i++) {
             comparisonCount++;
+
+            // Once the element at index i == value, count up
             if (list[i] == k) {
                 numberOfAppearances++;
-            } else if (list[i] > k) {
+            } else if (list[i] > k) { // once the elements are greater than k, array is sorted so break the loop
                 break;
             }
         }
