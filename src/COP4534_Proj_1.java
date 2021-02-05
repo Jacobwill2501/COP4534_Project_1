@@ -23,7 +23,7 @@ public class COP4534_Proj_1 {
         int valueOfN = 100;
         comparisonCount = 0;
 
-        String outputFilename = "COP4534_Proj_1_blocks_short.csv";
+        String outputFilename = "COP4534_Proj_1_blocks_large.csv";
         PrintWriter output = null;
 
         try {
@@ -41,7 +41,53 @@ public class COP4534_Proj_1 {
 
         for (int i = 0; i < numberOfExcelLines; i++) {
             int[] list = new int[valueOfN]; // initiating array with N length
-            fillArray(list); // filling the array with random values ranging from 0-10
+            fillArrayBlocksLarge(list); // filling the array with random values ranging from 0-10
+            Arrays.sort(list); // sorting the array
+
+            // O(n)
+            findIntegerCount1(list, x);
+            int countOf1 = comparisonCount;
+
+            // O(M + log n)
+            findIntegerCount2(list, x);
+            int countOf2 = comparisonCount;
+
+            // O(log n)
+            findIntegerCount3(list, x);
+            int countOf3 = comparisonCount;
+
+            // putting values in the csv file
+            output.println(valueOfN + "," + countOf1 + "," + countOf2 + "," + countOf3);
+
+            // increasing the length of array for next run
+            valueOfN += 100;
+        }
+
+        output.close();
+
+        // -----------------------------------------------------------------------------------
+        // Changing to Short Blocks
+        // -----------------------------------------------------------------------------------
+        valueOfN = 100;
+        outputFilename = "COP4534_Proj_1_blocks_short.csv";
+        output = null;
+
+        try {
+            output = new PrintWriter(new FileWriter(outputFilename));
+        } catch (IOException ex) {
+            System.exit(1);
+        }
+
+        // setting the value we will count in the different algorithms
+        x = rnd.nextInt(100);
+
+        // Titles for each column in the csv file
+        output.println("Value of N" + "," + "Comparisons of O(n)" + "," + "Comparisons of O(M + log n)" + ","
+                + "Comparisons of O(log n)");
+
+        for (int i = 0; i < numberOfExcelLines; i++) {
+            int[] list = new int[valueOfN]; // initiating array with N length
+            fillArrayBlocksShort(list); // filling the array with random values ranging from 0-10
             Arrays.sort(list); // sorting the array
 
             // O(n)
@@ -93,10 +139,17 @@ public class COP4534_Proj_1 {
         System.out.println();
     }
 
-    private void fillArray(int[] list) {
+    private void fillArrayBlocksLarge(int[] list) {
         Random rnd = new Random();
         for (int i = 0; i < list.length; i++) {
             list[i] = rnd.nextInt(10);
+        }
+    }
+
+    private void fillArrayBlocksShort(int[] list) {
+        Random rnd = new Random();
+        for (int i = 0; i < list.length; i++) {
+            list[i] = rnd.nextInt(100);
         }
     }
 
