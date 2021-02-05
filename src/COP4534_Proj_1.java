@@ -39,6 +39,8 @@ public class COP4534_Proj_1 {
         output.println("Value of N" + "," + "Comparisons of O(n)" + "," + "Comparisons of O(M + log n)" + ","
                 + "Comparisons of O(log n)");
 
+        System.out.println("Large blocks is starting");
+
         for (int i = 0; i < numberOfExcelLines; i++) {
             int[] list = new int[valueOfN]; // initiating array with N length
             fillArrayBlocksLarge(list); // filling the array with random values ranging from 0-10
@@ -59,11 +61,22 @@ public class COP4534_Proj_1 {
             // putting values in the csv file
             output.println(valueOfN + "," + countOf1 + "," + countOf2 + "," + countOf3);
 
+            if(i == 2500){
+                System.out.println("Large blocks is 25% complete");
+            } else if(i == 5000){
+                System.out.println("Large blocks is 50% complete");
+            }else if(i == 7500){
+                System.out.println("Large blocks is 75% complete");
+            }
+
             // increasing the length of array for next run
             valueOfN += 100;
         }
 
+
         output.close();
+        System.out.println("Large blocks sheet has finished");
+        System.out.println("------------------------------------\n");
 
         // -----------------------------------------------------------------------------------
         // Changing to Short Blocks
@@ -85,6 +98,8 @@ public class COP4534_Proj_1 {
         output2.println("Value of N" + "," + " Comparisons of O(n)" + "," + " Comparisons of O(M + log n)" + ","
                 + " Comparisons of O(log n)");
 
+        System.out.println("Small blocks is starting");
+
         for (int i = 0; i < numberOfExcelLines; i++) {
             int[] list = new int[valueOfN]; // initiating array with N length
             fillArrayBlocksShort(list); // filling the array with random values ranging from 0-10
@@ -105,11 +120,20 @@ public class COP4534_Proj_1 {
             // putting values in the csv file
             output2.println(valueOfN + "," + countOf1 + "," + countOf2 + "," + countOf3);
 
+            if(i == 2500){
+                System.out.println("Small blocks is 25% complete");
+            } else if(i == 5000){
+                System.out.println("Small blocks is 50% complete");
+            }else if(i == 7500){
+                System.out.println("Small blocks is 75% complete");
+            }
+
             // increasing the length of array for next run
             valueOfN += 100;
         }
 
         output2.close();
+        System.out.println("Small blocks sheet has finished");
     }
 
     private int binarySearch(int[] list, int k) {
