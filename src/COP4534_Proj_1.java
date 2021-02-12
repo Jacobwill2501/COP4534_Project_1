@@ -61,18 +61,17 @@ public class COP4534_Proj_1 {
             // putting values in the csv file
             output.println(valueOfN + "," + countOf1 + "," + countOf2 + "," + countOf3);
 
-            if(i == 2500){
+            if (i == 2500) {
                 System.out.println("Large blocks is 25% complete");
-            } else if(i == 5000){
+            } else if (i == 5000) {
                 System.out.println("Large blocks is 50% complete");
-            }else if(i == 7500){
+            } else if (i == 7500) {
                 System.out.println("Large blocks is 75% complete");
             }
 
             // increasing the length of array for next run
             valueOfN += 100;
         }
-
 
         output.close();
         System.out.println("Large blocks sheet has finished");
@@ -120,11 +119,11 @@ public class COP4534_Proj_1 {
             // putting values in the csv file
             output2.println(valueOfN + "," + countOf1 + "," + countOf2 + "," + countOf3);
 
-            if(i == 2500){
+            if (i == 2500) {
                 System.out.println("Small blocks is 25% complete");
-            } else if(i == 5000){
+            } else if (i == 5000) {
                 System.out.println("Small blocks is 50% complete");
-            }else if(i == 7500){
+            } else if (i == 7500) {
                 System.out.println("Small blocks is 75% complete");
             }
 
@@ -222,9 +221,51 @@ public class COP4534_Proj_1 {
 
     // O(log n)
     private int findIntegerCount3(int[] list, int k) {
-        int numberOfAppearances = 0;
         comparisonCount = 0;
+        int lastIndex = list.length - 1;
+
+        int right = locateRightEnd(list, 0, lastIndex, k);
+        int left = locateLeftEnd(list, 0, lastIndex, k);
+
+        int numberOfAppearances = (right - left) + 1;
 
         return numberOfAppearances;
     }
+
+    private int locateLeftEnd(int[] list, int first, int last, int x) {
+        int loc;
+
+        comparisonCount++;
+        if (first > last) {
+            loc = first;
+        } else {
+            int mid = (first + last) / 2;
+            comparisonCount++;
+            if (x <= list[mid]) {
+                loc = locateLeftEnd(list, first, mid - 1, x);
+            } else {
+                loc = locateLeftEnd(list, mid + 1, last, x);
+            }
+        }
+        return loc;
+    }
+
+    private int locateRightEnd(int[] list, int first, int last, int x) {
+        int loc;
+
+        comparisonCount++;
+        if (first > last) {
+            loc = last;
+        } else {
+            int mid = (first + last) / 2;
+            comparisonCount++;
+            if (x >= list[mid]) {
+                loc = locateRightEnd(list, mid + 1, last, x);
+            } else {
+                loc = locateRightEnd(list, first, mid - 1, x);
+            }
+        }
+        return loc;
+    }
+
 }
